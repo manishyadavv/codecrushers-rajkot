@@ -9,10 +9,9 @@ https://docs.djangoproject.com/en/1.11/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
+import configparser
 import os
 import socket
-
-import configparser
 
 config = configparser.ConfigParser(allow_no_value=True)
 
@@ -57,6 +56,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'file_recording.user_registration',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
