@@ -7,3 +7,5 @@ class Profile(models.Model):
     phone = models.CharField(max_length=10)
     email = models.CharField(max_length=50)
     address = models.CharField(max_length=5000)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
