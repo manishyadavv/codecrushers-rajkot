@@ -1,0 +1,36 @@
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    sha: e306ff3b7d0d9a6fc7d128ef9ca2e0b6e6e76e8f
+    hooks:
+    -   id: autopep8-wrapper
+    -   id: check-added-large-files
+        exclude: (angular.js)
+    -   id: check-case-conflict
+    -   id: check-json
+    -   id: check-merge-conflict
+    -   id: check-yaml
+    -   id: debug-statements
+    -   id: double-quote-string-fixer
+    -   id: end-of-file-fixer
+    -   id: flake8
+        exclude: (.*migrations.*|000*.py )
+        args:
+        - --max-line-length=99
+    -   id: trailing-whitespace
+    -   id: name-tests-test
+        exclude: (.*migrations.*|migrations/0001_initial.py)
+        args:
+        - --max-line-length=99
+-   repo: git@github.com:pre-commit/pre-commit
+    sha: 0443ca24a2ebd0184c408535a4f7fc5aa9ea7126
+    hooks:
+    -   id: validate_config
+    -   id: validate_manifest
+-   repo: git@github.com:asottile/reorder_python_imports
+    sha: 8b583ac1beb0dd0f14c4bceb0a53bb1023cb3dd7
+    hooks:
+    -   id: reorder-python-imports
+-   repo: git://github.com/pre-commit/mirrors-pylint
+    sha: 4972270a188e28f100cd0db472e05f59d9621e54
+    hooks:
+    -   id: pylint
+        exclude: (\.py$)
