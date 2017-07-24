@@ -237,3 +237,6 @@ $RECYCLE.BIN/
 # directories added by rahul
  .CLion2017.1/
  .IntelliJIdea2017.1/
+
+ # configuration files
+ *.cfg
