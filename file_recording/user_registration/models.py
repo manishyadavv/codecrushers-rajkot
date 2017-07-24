@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import hashlib
 
 from django.db import models
@@ -17,8 +18,9 @@ class User(models.Model):
 
     def save(self, *args, **kwargs):
         super(User, self).save(*args, **kwargs)
-        self.uid = hashlib.sha1(str(self.id)).hexdigest()
-        super(User, self).save(*args, **kwargs)
+        self.uid = hashlib.sha1(str(self.id).encode('utf-8')).hexdigest()
+        print(self.uid + 'fasdsa')
+        super(User, self).update()
 
 
 class LoginLog(models.Model):

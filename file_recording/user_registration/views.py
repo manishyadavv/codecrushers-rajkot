@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from rest_framework.decorators import api_view
 from rest_framework.decorators import parser_classes
 from rest_framework.parsers import JSONParser
