@@ -17,10 +17,10 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
-        super(User, self).save(*args, **kwargs)
-        self.uid = hashlib.sha1(str(self.id).encode('utf-8')).hexdigest()
+        self.uid = hashlib.sha1(
+            (str(self.email) + str(self.phone)).encode('utf-8')).hexdigest()
         print(self.uid + 'fasdsa')
-        super(User, self).update()
+        super(User, self).save(*args, **kwargs)
 
 
 class LoginLog(models.Model):
