@@ -18,7 +18,7 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
-        if self.uid is None:
+        if self.uid == '':
             self.uid = hashlib.sha1(
                 (str(self.email) + str(self.phone)).encode('utf-8')).hexdigest()
         super(User, self).save(*args, **kwargs)
