@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'file_recording.user_registration',
     'rest_framework',
+    'cronjobs'
 ]
 
 MIDDLEWARE = [

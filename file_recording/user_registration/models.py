@@ -6,7 +6,17 @@ from django.db import models
 
 
 class User(models.Model):
+    GENDERS = (
+        (1, 'Male'),
+        (2, 'Female'),
+        (3, 'Others')
+    )
     name = models.CharField(max_length=100)
+    gender = models.CharField(max_length=10, choices=GENDERS)
+    father_name = models.CharField(max_length=100)
+    spouse_name = models.CharField(max_length=100, blank=True, null=True)
+    pan_number = models.CharField(max_length=10)
+    aadhar_no = models.CharField(max_length=12)
     birth_date = models.DateField()
     phone = models.CharField(max_length=10, unique=True)
     email = models.CharField(max_length=50, unique=True)

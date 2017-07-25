@@ -13,9 +13,9 @@ def user_login(user: User):
     return session
 
 
-def user_logout(user: User, session: Session):
+def user_logout(user: User, session: Session, auto_logout=False):
     user.is_login = False
     user.save()
     session.logout_at = datetime.now()
-    session.auto_logout = False
+    session.auto_logout = auto_logout
     session.save()
