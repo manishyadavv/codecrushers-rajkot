@@ -22,7 +22,7 @@ class User(models.Model):
     phone = models.CharField(max_length=13, unique=True,
                              validators=[RegexValidator(regex=r'^(?:\+?91)?[789]\d{9,10}$',
                                                         message='Phone number not valid.')])
-    email = models.CharField(max_length=50, unique=True)
+    email = models.EmailField(unique=True)
     address = models.TextField()
     password = models.CharField(max_length=128)
     uid = models.CharField(max_length=40, unique=True, blank=True)
