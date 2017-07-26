@@ -1,10 +1,10 @@
 from rest_framework import serializers
 
-from .models import notification
+from file_recording.updates.models import Notification
 
 
-class notificationSerializer(serializers.ModelSerializer):
+class NotificationSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = notification
-        felds = '__all__'
+        model = Notification
+        exclude = ('id', 'created_at', 'updated_at')
