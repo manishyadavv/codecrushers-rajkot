@@ -2,6 +2,7 @@
 import hashlib
 from datetime import datetime
 
+from django.core.validators import RegexValidator
 from django.db import models
 
 
@@ -18,9 +19,9 @@ class User(models.Model):
     pan_number = models.CharField(max_length=10)
     aadhar_no = models.CharField(max_length=12)
     birth_date = models.DateField()
-    phone = models.CharField(max_length=10, unique=True,
+    phone = models.CharField(max_length=13, unique=True,
                              validators=[RegexValidator(regex=r'^(?:\+?91)?[789]\d{9,10}$',
-                                                        message='phone number not valid',), )
+                                                        message='Phone number not valid.')])
     email = models.CharField(max_length=50, unique=True)
     address = models.TextField()
     password = models.CharField(max_length=128)
