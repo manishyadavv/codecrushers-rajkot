@@ -1,4 +1,5 @@
 from autoslug import AutoSlugField
+from django.core.validators import MinValueValidator
 from django.db import models
 
 
@@ -19,11 +20,14 @@ class Flat(models.Model):
         'Scheme', on_delete=models.CASCADE, blank=False, null=False)
     flat_type = models.ForeignKey(
         FlatType, on_delete=models.CASCADE, blank=False, null=False)
-    carpet_area = models.DecimalField(max_digits=10, decimal_places=2)
-    accomodation = models.IntegerField()
-    estimate_cost = models.BigIntegerField()
-    application_amount = models.BigIntegerField()
-    maintenance_deposit = models.BigIntegerField()
+    carpet_area = models.DecimalField(
+        max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
+    accomodation = models.IntegerField(validators=[MinValueValidator(0)])
+    estimate_cost = models.BigIntegerField(validators=[MinValueValidator(0)])
+    application_amount = models.BigIntegerField(
+        validators=[MinValueValidator(0)])
+    maintenance_deposit = models.BigIntegerField(
+        validators=[MinValueValidator(0)])
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

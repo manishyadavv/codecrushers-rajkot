@@ -12,16 +12,16 @@ class FlatTypeSerializer(ModelSerializer):
         fields = '__all__'
 
 
+class SchemeSerializer(ModelSerializer):
+    class Meta:
+        model = Scheme
+        fields = '__all__'
+
+
 class FlatSerializer(ModelSerializer):
     flat_type = FlatTypeSerializer(many=False)
     scheme = SchemeSerializer(many=False)
 
     class Meta:
         model = Flat
-        fields = '__all__'
-
-
-class SchemeSerializer(ModelSerializer):
-    class Meta:
-        model = Scheme
         fields = '__all__'
