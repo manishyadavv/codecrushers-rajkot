@@ -10,9 +10,10 @@ https://docs.djangoproject.com/en/1.11/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
-import configparser
 import os
 import socket
+
+import configparser
 
 config = configparser.ConfigParser(allow_no_value=True)
 
@@ -105,11 +106,11 @@ DATABASES = {
     'default': {
         'CONN_MAX_AGE': 500,
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': DB_NAME,
-        'USER': DB_USER,
-        'PASSWORD': DB_PASSWORD,
-        'HOST': DB_HOST,
-        'PORT': DB_PORT,
+        'NAME': 'rajkot',
+        'USER': 'ry007',
+        'PASSWORD': 'APPLERY007',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
