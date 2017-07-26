@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for file_recording project.
 
@@ -59,6 +60,7 @@ INSTALLED_APPS = [
     'file_recording.user_registration',
     'rest_framework',
     'file_recording.updates.apps.UpdatesConfig',
+    'cronjobs'
 ]
 
 MIDDLEWARE = [
@@ -109,7 +111,7 @@ DATABASES = {
         'USER': DB_USER,
         'PASSWORD': DB_PASSWORD,
         'HOST': DB_HOST,
-        'PORT': DB_PORT,
+        'PORT': int(DB_PORT),
     }
 }
 
