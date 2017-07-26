@@ -17,7 +17,7 @@ class FlatType(models.Model):
 
 class Flat(models.Model):
     scheme = models.ForeignKey(
-        'Scheme', on_delete=models.CASCADE, blank=False, null=False)
+        'Scheme', on_delete=models.CASCADE, blank=False, null=False, related_name='flats')
     flat_type = models.ForeignKey(
         FlatType, on_delete=models.CASCADE, blank=False, null=False)
     carpet_area = models.DecimalField(

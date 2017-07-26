@@ -19,10 +19,15 @@ from file_recording.schemes.serializers import SchemeSerializer
 def get_schemes(request):
     if request.data.get('admin'):
         schemes = Scheme.objects.all()
+        serializer = SchemeSerializer(schemes, many=True)
+    elif request.data.get('scheme_slug'):
+        pass
+
     else:
         schemes = Scheme.objects.filter(
             start_date__lte=datetime.now(), end_date__gte=datetime.now())
-    serializer = SchemeSerializer(schemes, many=True)
+        serializer = SchemeSerializer(schemes, many=True)
+
     return_obj = ReturnObj().ret(200)
     return_obj['content']['result']['schemes'] = serializer.data
     return Response(data=return_obj['content'], status=return_obj['status'])
