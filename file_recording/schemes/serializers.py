@@ -13,11 +13,11 @@ class FlatTypeSerializer(ModelSerializer):
 
 
 class FlatSerializer(ModelSerializer):
-    flat_type = FlatTypeSerializer(many=False, read_only=True)
+    flat_type = FlatTypeSerializer(many=False)
 
     class Meta:
         model = Flat
-        fields = '__all__'
+        exclude = ('scheme',)
 
 
 class SchemeSerializer(ModelSerializer):
