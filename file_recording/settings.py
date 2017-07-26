@@ -60,7 +60,8 @@ INSTALLED_APPS = [
     'file_recording.user_registration',
     'rest_framework',
     'file_recording.updates.apps.UpdatesConfig',
-    'cronjobs'
+    'cronjobs',
+    'file_recording.schemes'
 ]
 
 MIDDLEWARE = [
