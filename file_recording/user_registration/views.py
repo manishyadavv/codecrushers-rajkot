@@ -43,7 +43,10 @@ def login_user(request):
         return Response(data=return_obj['content'], status=return_obj['status'])
 
     if user:
-        if user.password == password:
+        if user.is_login:
+            return_obj = ReturnObj().ret(409)
+            return_obj['content']['result']['message'] = 'User is already signed in.'
+        elif user.password == password:
             session = user_login(user)
             return_obj = ReturnObj().ret(200)
             return_obj['content']['result']['message'] = 'Login Successful'
@@ -64,6 +67,10 @@ def logout_user(request):
     except Session.DoesNotExist:
         return_obj = ReturnObj().ret(404)
         return_obj['content']['result']['message'] = 'The given session does not exist.'
+        return Response(data=return_obj['content'], status=return_obj['status'])
+    if session.auto_logout is not None:
+        return_obj = ReturnObj().ret(409)
+        return_obj['content']['result']['message'] = 'The user is already logged out.'
         return Response(data=return_obj['content'], status=return_obj['status'])
     user_logout(session.user, session)
     return_obj = ReturnObj().ret(200)
