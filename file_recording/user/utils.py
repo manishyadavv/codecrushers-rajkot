@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 
-from file_recording.user_registration.models import Session
-from file_recording.user_registration.models import User
+from file_recording.user.models import Session
+from file_recording.user.models import User
 
 
 def user_login(user: User):

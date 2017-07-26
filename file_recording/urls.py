@@ -21,7 +21,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 from file_recording.schemes.urls import urlpatterns as scheme_urls
 from file_recording.updates.urls import urlpatterns as notification_urls
-from file_recording.user_registration.urls import urlpatterns as user_urls
+from file_recording.user.urls import urlpatterns as user_urls
 admin.autodiscover()
 
 urlpatterns = [
