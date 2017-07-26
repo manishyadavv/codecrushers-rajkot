@@ -51,6 +51,7 @@ def login_user(request):
             return_obj = ReturnObj().ret(200)
             return_obj['content']['result']['message'] = 'Login Successful'
             return_obj['content']['result']['session_id'] = session.session_id
+            return_obj['content']['result']['user_id'] = session.user.uid
         else:
             return_obj = ReturnObj().ret(401)
             return_obj['content']['result']['message'] = 'Incorrect Password.'
