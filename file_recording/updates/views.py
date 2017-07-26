@@ -18,7 +18,7 @@ from file_recording.updates.serializers import NotificationSerializer
 def notification(request):
     if request.method == 'GET':
         notifications = Notification.objects.filter(
-            start_date__gte=datetime.now(), end_date__lte=datetime.now())
+            start_date__lte=datetime.now(), end_date__gte=datetime.now())
         serializer = NotificationSerializer(notifications, many=True)
         return_obj = ReturnObj().ret(200)
         return_obj['content']['result']['notifications'] = serializer.data
@@ -26,6 +26,7 @@ def notification(request):
     elif request.method == 'POST':
         serializer = NotificationSerializer(data=request.data)
         if serializer.is_valid():
+            serializer.save()
             return_obj = ReturnObj().ret(201)
             return_obj['content']['result']['notification'] = serializer.data
             return Response(data=return_obj['content'], status=return_obj['status'])
