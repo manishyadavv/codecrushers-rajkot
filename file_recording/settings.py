@@ -60,7 +60,7 @@ INSTALLED_APPS = [
     'file_recording.user',
     'rest_framework',
     'file_recording.updates',
-    'cronjobs',
+    'django_cron',
     'file_recording.schemes',
     'file_recording.registration'
 ]
@@ -73,6 +73,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CRON_CLASSES = [
+    'file_recording.user.cron.AutoLogout',
 ]
 
 ROOT_URLCONF = 'file_recording.urls'
