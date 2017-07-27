@@ -19,13 +19,17 @@ from django.conf.urls import url
 from django.contrib import admin
 from rest_framework.urlpatterns import format_suffix_patterns
 
+from file_recording.registration.urls import urlpatterns as registeration_urls
+from file_recording.schemes.urls import urlpatterns as scheme_urls
 from file_recording.updates.urls import urlpatterns as notification_urls
-from file_recording.user_registration.urls import urlpatterns as user_urls
+from file_recording.user.urls import urlpatterns as user_urls
 admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^user/', include(user_urls)),
     url(r'^notifications/', include(notification_urls)),
+    url(r'scheme/', include(scheme_urls)),
+    url(r'registeration/', include(registeration_urls))
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)

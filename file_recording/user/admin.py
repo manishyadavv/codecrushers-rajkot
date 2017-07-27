@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 
-from file_recording.user_registration.models import Session
-from file_recording.user_registration.models import User
+from file_recording.user.models import Session
+from file_recording.user.models import User
 
 # Register your models here.
 

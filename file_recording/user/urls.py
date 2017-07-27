@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import url
 
-from file_recording.user_registration import views
+from file_recording.user import views
 
 urlpatterns = [
     url(r'register$', views.register_user, name='user_registration'),

@@ -5,11 +5,11 @@ from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 
 from file_recording.constants.response_obj import ReturnObj
-from file_recording.user_registration.models import Session
-from file_recording.user_registration.models import User
-from file_recording.user_registration.serializer import UserRegistrationSerializer
-from file_recording.user_registration.utils import user_login
-from file_recording.user_registration.utils import user_logout
+from file_recording.user.models import Session
+from file_recording.user.models import User
+from file_recording.user.serializer import UserRegistrationSerializer
+from file_recording.user.utils import user_login
+from file_recording.user.utils import user_logout
 
 
 @api_view(['POST'])

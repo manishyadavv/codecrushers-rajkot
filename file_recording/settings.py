@@ -57,10 +57,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'file_recording.user_registration',
+    'file_recording.user',
     'rest_framework',
-    'file_recording.updates',
-    'cronjobs'
+    'file_recording.updates.apps.UpdatesConfig',
+    'cronjobs',
+    'file_recording.schemes',
+    'file_recording.registration'
 ]
 
 MIDDLEWARE = [
