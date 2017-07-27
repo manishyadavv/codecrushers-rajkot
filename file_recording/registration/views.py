@@ -5,12 +5,15 @@ from rest_framework.response import Response
 
 from file_recording.constants.response_obj import ReturnObj
 from file_recording.registration.serializer import RegistrationWriteSerializer
+from file_recording.user.models import User
 # Create your views here.
 
 
 @api_view(['POST'])
 @parser_classes((JSONParser,))
 def user_application(request):
+    user = User.objects.get(uid=request.data['user'])
+    request.data['user'] = user.id
     serializer = RegistrationWriteSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()

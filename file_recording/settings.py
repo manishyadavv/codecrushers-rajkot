@@ -59,7 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'file_recording.user',
     'rest_framework',
-    'file_recording.updates.apps.UpdatesConfig',
+    'file_recording.updates',
     'cronjobs',
     'file_recording.schemes',
     'file_recording.registration'
