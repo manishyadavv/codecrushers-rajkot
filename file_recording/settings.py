@@ -14,6 +14,7 @@ import configparser
 import os
 import socket
 
+
 config = configparser.ConfigParser(allow_no_value=True)
 
 ROOT = os.path.dirname(os.path.dirname(__file__))
@@ -46,7 +47,8 @@ SECRET_KEY = '-(k7w8z88&j(3qyv(99r7997#^)2=5zadrujfm8hxa1mbv5!el'
 DEBUG = config.get('general', 'DEBUG')
 
 ALLOWED_HOSTS = []
-
+MEDIA_ROOT = BASE_DIR + '/file_recording/document/docs/'
+MEDIA_URL = 'documents/docs/'
 
 # Application definition
 
@@ -62,7 +64,9 @@ INSTALLED_APPS = [
     'file_recording.updates',
     'django_cron',
     'file_recording.schemes',
-    'file_recording.registration'
+    'file_recording.registration',
+    'file_recording.document',
+    'cronjobs',
 ]
 
 MIDDLEWARE = [
@@ -159,3 +163,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# fs = FileSystemStorage(location=MEDIA_ROOT)
