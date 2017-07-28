@@ -10,11 +10,10 @@ https://docs.djangoproject.com/en/1.11/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
+import configparser
 import os
 import socket
 
-import configparser
-from django.core.files.storage import FileSystemStorage
 
 config = configparser.ConfigParser(allow_no_value=True)
 
@@ -48,8 +47,8 @@ SECRET_KEY = '-(k7w8z88&j(3qyv(99r7997#^)2=5zadrujfm8hxa1mbv5!el'
 DEBUG = config.get('general', 'DEBUG')
 
 ALLOWED_HOSTS = []
-MEDIA_ROOT = '/home/ry9910725/codecrushers-rajkot/docs'
-
+MEDIA_ROOT = BASE_DIR + '/file_recording/document/docs/'
+MEDIA_URL = 'documents/docs/'
 
 # Application definition
 
@@ -64,7 +63,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'file_recording.document',
     'cronjobs',
-    'django_extensions'
 ]
 
 MIDDLEWARE = [
@@ -159,4 +157,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-fs = FileSystemStorage(location=MEDIA_ROOT)
+# fs = FileSystemStorage(location=MEDIA_ROOT)

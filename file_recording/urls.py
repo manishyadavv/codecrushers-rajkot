@@ -18,10 +18,12 @@ from django.conf.urls import include
 from django.conf.urls import url
 from django.contrib import admin
 
+from file_recording.document.urls import urlpatterns as document_urls
 from file_recording.user_registration.urls import urlpatterns as user_urls
 admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^user/', include(user_urls)),
-]
+    url(r'documents/', include(document_urls))
+]  # +static()
