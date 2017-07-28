@@ -25,7 +25,7 @@ def get_schemes(request):
             return_obj = ReturnObj().ret(404)
             return_obj['content']['result']['message'] = 'Invalid slug.'
             return Response(data=return_obj['content'], status=return_obj['status'])
-        serializer = SchemeSerializer(scheme)
+        serializer = SchemeSerializer(scheme, many=True)
 
     else:
         schemes = Scheme.objects.filter(
