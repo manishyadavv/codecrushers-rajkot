@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'file_recording.user',
     'rest_framework',
     'file_recording.updates',
+    'file_recording.employee',
     'django_cron',
     'file_recording.schemes',
     'file_recording.registration',
