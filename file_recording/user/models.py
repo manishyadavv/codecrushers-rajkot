@@ -14,10 +14,24 @@ class User(models.Model):
         (2, 'Female'),
         (3, 'Others')
     )
+    CASTE = (
+            (1, 'GENERAL'),
+            (2, 'OBC'),
+            (3, 'SC'),
+            (4, 'ST')
+    )
     name = models.CharField(max_length=100)
+    caste = models.IntegerField(choices=CASTE)
     gender = models.IntegerField(choices=GENDERS)
     father_name = models.CharField(max_length=100)
-    spouse_name = models.CharField(max_length=100, blank=True, null=True)
+    spouse_name = models.CharField(
+        max_length=100, blank=True, null=False, default='')
+    spouse_aadhar = models.CharField(max_length=12,
+                                     validators=[
+                                         RegexValidator(
+                                             regex=r'^[0-9]{12}$',
+                                             message='Spouse\'s Aadhar number not valid.')],
+                                     blank=True, null=False, default='')
     pan_number = models.CharField(max_length=10,
                                   validators=[RegexValidator(regex=r'^[A-Z]{5}[0-9]{4}[A-Z]{1}$',
                                                              message='Pan number not valid.')])
@@ -38,6 +52,12 @@ class User(models.Model):
         Admin, on_delete=models.CASCADE, null=True, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def clean(self):
+        from django.core.exceptions import ValidationError
+        if (self.spouse_name != '' and self.spouse_aadhar == '') or (
+                self.spouse_name == '' and self.spouse_aadhar != ''):
+            raise ValidationError('Incomplete spouse details.')
 
     def save(self, *args, **kwargs):
         if self.uid == '':
