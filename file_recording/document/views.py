@@ -9,6 +9,7 @@ from file_recording.document.models import Document
 from file_recording.document.models import DocumentType
 from file_recording.document.serializer import DocumentSerializer
 from file_recording.document.serializer import DocumentTypeSerializer
+from file_recording.user.models import User
 
 
 @api_view(['GET'])
@@ -24,6 +25,7 @@ def doc_types(request):
 @api_view(['POST'])
 @parser_classes((FileUploadParser,))
 def upload_file(request):
+    request.data['user'] = User.objects.get(uid=request.data['user']).id
     serializer = DocumentSerializer(request.data)
     if serializer.is_valid():
         serializer.save()
