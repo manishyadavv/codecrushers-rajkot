@@ -23,7 +23,7 @@ def user_application(request):
             return_obj = ReturnObj().ret(201)
             return_obj['content']['result']['application'] = serializer.data
         else:
-            return_obj = ReturnObj().ret(200)
+            return_obj = ReturnObj().ret(400)
             return_obj['content']['result']['error'] = serializer.errors
     elif request.method == 'GET':
         uid = request.query_params.get('uid')
