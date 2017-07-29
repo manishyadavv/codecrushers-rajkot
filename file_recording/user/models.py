@@ -15,7 +15,7 @@ class User(models.Model):
         (3, 'Others')
     )
     name = models.CharField(max_length=100)
-    gender = models.CharField(max_length=10, choices=GENDERS)
+    gender = models.IntegerField(choices=GENDERS)
     father_name = models.CharField(max_length=100)
     spouse_name = models.CharField(max_length=100, blank=True, null=True)
     pan_number = models.CharField(max_length=10,
