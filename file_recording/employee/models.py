@@ -10,8 +10,8 @@ class Admin(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=128)
-    created_by = models.ForeignKey(
-        'Admin', on_delete=models.CASCADE, null=True, blank=False, default=None)
+    # created_by = models.ForeignKey(
+    #     'Admin', on_delete=models.CASCADE, null=True, blank=False, default=None)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
