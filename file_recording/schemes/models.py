@@ -28,6 +28,7 @@ class Flat(models.Model):
         validators=[MinValueValidator(0)])
     maintenance_deposit = models.BigIntegerField(
         validators=[MinValueValidator(0)])
+    no_of_flats = models.IntegerField(validators=[MinValueValidator(0)])
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
