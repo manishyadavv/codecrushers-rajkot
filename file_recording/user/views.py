@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from file_recording.constants.response_obj import ReturnObj
 from file_recording.user.models import Session
 from file_recording.user.models import User
+from file_recording.user.serializer import UserReadSerializer
 from file_recording.user.serializer import UserRegistrationSerializer
 from file_recording.user.utils import user_login
 from file_recording.user.utils import user_logout
@@ -82,14 +83,21 @@ def logout_user(request):
 @api_view(['GET'])
 @parser_classes((JSONParser,))
 def user_details(request):
-    session_id = request.query_params.get('session_id')
-    session = Session.objects.filter(session_id=session_id)
-    if len(session) == 0:
-        return_obj = ReturnObj().ret(404)
-        return_obj['content']['result']['message'] = "Session id doesn't exist."
-        return Response(data=return_obj['content'], status=return_obj['status'])
+    if request.query_params.get('session_id'):
+        session_id = request.query_params.get('session_id')
+        session = Session.objects.filter(session_id=session_id)
+        if len(session) == 0:
+            return_obj = ReturnObj().ret(404)
+            return_obj['content']['result']['message'] = "Session id doesn't exist."
+            return Response(data=return_obj['content'], status=return_obj['status'])
+        else:
+            serializer_data = UserReadSerializer(session[0].user).data
+            return_obj = ReturnObj().ret(200)
+            return_obj['content']['result']['user'] = serializer_data
+            return Response(data=return_obj['content'], status=return_obj['status'])
     else:
-        serializer_data = UserRegistrationSerializer(session[0].user).data
+        users = User.objects.all()
+        serializer = UserReadSerializer(users, many=True)
         return_obj = ReturnObj().ret(200)
-        return_obj['content']['result']['user'] = serializer_data
+        return_obj['content']['result']['user'] = serializer.data
         return Response(data=return_obj['content'], status=return_obj['status'])

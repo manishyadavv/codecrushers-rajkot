@@ -8,3 +8,9 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         exclude = ('id', 'created_at', 'updated_at')
+
+
+class UserReadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        exclude = ('id',)
