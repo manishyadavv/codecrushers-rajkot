@@ -25,7 +25,7 @@ def doc_types(request):
 @parser_classes((JSONParser,))
 def upload_file(request):
     request.data['user'] = User.objects.get(uid=request.data['user']).id
-    serializer = DocumentSerializer(request.data)
+    serializer = DocumentSerializer(request.data, many=True)
     if serializer.is_valid():
         serializer.save()
         return_obj = ReturnObj().ret(201)
