@@ -7,7 +7,11 @@ from rest_framework.response import Response
 
 from file_recording.constants.response_obj import ReturnObj
 from file_recording.schemes.models import Scheme
+from file_recording.schemes.serializers import FlatWriteSerializer
 from file_recording.schemes.serializers import SchemeSerializer
+from file_recording.schemes.serializers import SchemeWriteSerializer
+
+
 # Create your views here.
 
 
@@ -40,29 +44,26 @@ def get_schemes(request):
 @api_view(['POST'])
 @parser_classes((JSONParser,))
 def create_scheme(request):
-    pass
-#     scheme = request.data.get('scheme')
-#     flats = request.data.get('flats')
-#     schemeserializer = SchemeSerializer(data=request.data)
-#     if not schemeserializer.is_valid():
-#         return_obj = ReturnObj().ret(400)
-#         return_obj['content']['result']['message'] = schemeserializer.errors
-#         return Response(data=return_obj['content'], status=return_obj['status'])
-#     for flat in flats:
-#         flat_serializer = FlatSerializer(data=flat)
-#         if not flat_serializer.is_valid():
-#             return_obj = ReturnObj().ret(400)
-#             return_obj['content']['result']['message'] = flat_serializer.errors
-#             return Response(data=return_obj['content'], status=return_obj['status'])
-#
-#     scheme = schemeserializer.save()
-#     for flat in flats:
-#         flat_type, _ = FlatType.objects.get_or_create(
-#             name=flat.pop('flat_type'))
-#         Flat(**flat, scheme=scheme, flat_type=flat_type).save()
-#     schemeserializer.is_valid()
-#     print(schemeserializer.errors)
-#     schemeserializer.save()
-#     return_obj = ReturnObj().ret(201)
-#     return_obj['content']['result']['scheme'] = schemeserializer.data
-#     return Response(data=return_obj['content'], status=return_obj['status'])
+    serializer = SchemeWriteSerializer(request.data)
+    if serializer.is_valid():
+        return_obj = ReturnObj().ret(201)
+        serializer.save()
+        return_obj['content']['result']['scheme'] = serializer.data
+    else:
+        return_obj = ReturnObj().ret(400)
+        return_obj['content']['result']['errors'] = serializer.errors
+    return Response(data=return_obj['content'], status=return_obj['status'])
+
+
+@api_view(['POST'])
+@parser_classes((JSONParser,))
+def add_flats(request):
+    serializer = FlatWriteSerializer(request.data)
+    if serializer.is_valid():
+        return_obj = ReturnObj().ret(201)
+        serializer.save()
+        return_obj['content']['result']['scheme'] = serializer.data
+    else:
+        return_obj = ReturnObj().ret(400)
+        return_obj['content']['result']['errors'] = serializer.errors
+    return Response(data=return_obj['content'], status=return_obj['status'])

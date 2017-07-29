@@ -26,3 +26,15 @@ class SchemeSerializer(ModelSerializer):
     class Meta:
         model = Scheme
         fields = '__all__'
+
+
+class SchemeWriteSerializer(ModelSerializer):
+    class Meta:
+        model = Scheme
+        exclude = ('created_at', 'updated_at')
+
+
+class FlatWriteSerializer(ModelSerializer):
+    class Meta:
+        model = Flat
+        exclude = ('created_at', 'updated_at')
