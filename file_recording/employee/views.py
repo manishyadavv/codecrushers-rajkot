@@ -14,8 +14,14 @@ def create_admin(request):
     serializer = AdminSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
+        return_obj = ReturnObj().ret(201)
+        return_obj['content']['result'] = serializer.data
     else:
         print(serializer.errors)
+        return_obj = ReturnObj().ret(400)
+        return_obj['content']['result'] = serializer.errors
+
+    return Response(data=return_obj['content'], status=return_obj['status'])
 
 
 @api_view(['POST'])
