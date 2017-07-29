@@ -8,7 +8,6 @@ from django.db import models
 
 class Admin(models.Model):
     name = models.CharField(max_length=100)
-    employee_id = models.CharField(max_length=100, unique=True)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=128)
     created_by = models.ForeignKey(
