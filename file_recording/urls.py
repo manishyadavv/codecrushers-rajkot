@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^user/', include(user_urls)),
     url(r'^notifications/', include(notification_urls)),
-    url(r'scheme/', include(scheme_urls)),
-    url(r'registeration/', include(registeration_urls)),
-    url(r'documents/', include(document_urls))
+    url(r'^scheme/', include(scheme_urls)),
+    url(r'^registeration/', include(registeration_urls)),
+    url(r'^documents/', include(document_urls))
 ]  # +static()

@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'file_recording.schemes',
     'file_recording.registration',
     'file_recording.document',
+    'file_recording.result',
     'cronjobs',
 ]
 

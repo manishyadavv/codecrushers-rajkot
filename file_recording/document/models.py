@@ -1,7 +1,7 @@
 from autoslug.fields import AutoSlugField
 from django.db import models
 
-from file_recording.user_registration.models import User
+from file_recording.user.models import User
 
 
 class DocumentType(models.Model):
