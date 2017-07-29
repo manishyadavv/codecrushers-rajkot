@@ -14,7 +14,8 @@ class DocumentType(models.Model):
 class Document(models.Model):
     user = models.ForeignKey(User, related_name='documents',
                              on_delete=models.CASCADE, null=False, blank=False)
-    document = models.FileField()
+    document = models.TextField(null=False, blank=False)
+    mime_type = models.CharField(max_length=100)
     document_type = models.ForeignKey(
         DocumentType, on_delete=models.CASCADE, null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)

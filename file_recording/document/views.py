@@ -1,6 +1,5 @@
 from rest_framework.decorators import api_view
 from rest_framework.decorators import parser_classes
-from rest_framework.parsers import FileUploadParser
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 
@@ -23,7 +22,7 @@ def doc_types(request):
 
 
 @api_view(['POST'])
-@parser_classes((FileUploadParser,))
+@parser_classes((JSONParser,))
 def upload_file(request):
     request.data['user'] = User.objects.get(uid=request.data['user']).id
     serializer = DocumentSerializer(request.data)
