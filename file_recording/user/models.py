@@ -5,6 +5,8 @@ from datetime import datetime
 from django.core.validators import RegexValidator
 from django.db import models
 
+from file_recording.employee.models import Admin
+
 
 class User(models.Model):
     GENDERS = (
@@ -31,6 +33,9 @@ class User(models.Model):
     password = models.CharField(max_length=128)
     uid = models.CharField(max_length=40, unique=True, blank=True)
     is_login = models.BooleanField(default=False)
+    is_verified = models.BooleanField(default=False)
+    verified_by = models.ForeignKey(
+        Admin, on_delete=models.CASCADE, null=True, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
