@@ -6,6 +6,7 @@ from django_cron import CronJobBase
 
 from file_recording.registration.models import Registration
 from file_recording.result.models import DrawResult
+from file_recording.result.utils import email
 from file_recording.schemes.models import Scheme
 
 
@@ -19,6 +20,8 @@ class result_draw(CronJobBase):
         for user in users[:max([int(1.1 * flat.no_of_flats), flat.no_of_flats + 10])]:
             DrawResult(user=user, flat=flat, waiting_number=i,
                        scheme=flat.scheme).save()
+            message = email.create_message(None, user, flat)
+            email.send_message(None, message)
             i += 1
 
     def do(self):

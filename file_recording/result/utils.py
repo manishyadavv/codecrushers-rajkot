@@ -94,6 +94,7 @@ class Email:
             Returns:
                 Sent Message.
             """
+
         try:
             message = (self.service.users().messages().send(userId='me', body=message)
                        .execute())
