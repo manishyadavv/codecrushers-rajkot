@@ -16,3 +16,6 @@ class DrawResult(models.Model):
     waiting_number = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ('user', 'scheme')

@@ -14,17 +14,18 @@ class ResultDraw(CronJobBase):
     code = 'file_recording.result.ResultDraw'
 
     def allot_flats(self, flat):
-        registrations = Registration.objects.filter(flat=flat)
+        registrations = Registration.objects.filter(flat=flat, is_valid=True)
         users = [
             registration.user for registration in registrations if registration.is_valid]
         random.shuffle(users)
         i = 1
         for user in users[:max([int(1.1 * flat.no_of_flats), flat.no_of_flats + 10])]:
-            DrawResult(user=user, flat=flat, waiting_number=i,
-                       scheme=flat.scheme).save()
-            message = email.create_message(None, user, flat)
-            email.send_message(None, message)
-            i += 1
+            if not DrawResult.objects.filter(flat=flat, user__aadhar_no=user.spouse_aadhar) == []:
+                DrawResult(user=user, flat=flat, waiting_number=i,
+                           scheme=flat.scheme).save()
+                message = email.create_message(None, user, flat)
+                email.send_message(None, message)
+                i += 1
 
     def do(self):
         schemes = Scheme.objects.filter(draw_date=datetime.today())
