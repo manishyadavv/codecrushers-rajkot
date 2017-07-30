@@ -50,8 +50,10 @@ def get_file(request):
         documents = Document.objects.filter(user__uid=uid)
     docs = []
     for doc in documents:
-        docs.append({'doc_string': doc.document,'mime_type':doc.mime_type 'document_type': DocumentTypeSerializer(
-            doc.document_type).data})
+        docs.append({'doc_string': doc.document,
+                     'mime_type': doc.mime_type,
+                     'document_type': DocumentTypeSerializer(
+                         doc.document_type).data})
     return_obj = ReturnObj().ret(200)
     return_obj['content']['result']['documents'] = docs
     return Response(data=return_obj['content'], status=return_obj['status'])

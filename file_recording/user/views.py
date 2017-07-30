@@ -5,6 +5,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 
 from file_recording.constants.response_obj import ReturnObj
+from file_recording.employee.models import Admin
 from file_recording.user.models import Session
 from file_recording.user.models import User
 from file_recording.user.serializer import UserReadSerializer
@@ -101,3 +102,17 @@ def user_details(request):
         return_obj = ReturnObj().ret(200)
         return_obj['content']['result']['user'] = serializer.data
         return Response(data=return_obj['content'], status=return_obj['status'])
+
+
+@api_view(['POST'])
+@parser_classes((JSONParser,))
+def validate_user(request):
+    uid = request.data['uid']
+    user = User.objects.get(uid=uid)
+    employee = Admin.objects.get(email=request.data['email'])
+    user.verified_by = employee
+    user.is_verified = request.data['verified']
+    user.save()
+    return_obj = ReturnObj().ret(201)
+    return_obj['content']['result']['message'] = 'User validation successful.'
+    return Response(data=return_obj['content']['result'], status=return_obj['status'])
