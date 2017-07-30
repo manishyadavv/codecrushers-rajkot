@@ -19,8 +19,8 @@ class ResultDraw(CronJobBase):
             registration.user for registration in registrations if registration.is_valid]
         random.shuffle(users)
         i = 1
-        for user in users[:max([int(1.1 * flat.no_of_flats), flat.no_of_flats + 10])]:
-            if not DrawResult.objects.filter(flat=flat, user__aadhar_no=user.spouse_aadhar) == []:
+        for user in users[:max([int(1.5 * flat.no_of_flats), flat.no_of_flats + 10])]:
+            if not DrawResult.objects.filter(scheme=flat.scheme, user__aadhar_no=user.spouse_aadhar) == []:
                 DrawResult(user=user, flat=flat, waiting_number=i,
                            scheme=flat.scheme).save()
                 message = email.create_message(None, user, flat)

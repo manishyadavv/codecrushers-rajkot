@@ -8,6 +8,7 @@ from file_recording.employee.models import Admin
 from file_recording.registration.models import Registration
 from file_recording.registration.serializer import RegistrationReadSerializer
 from file_recording.registration.serializer import RegistrationWriteSerializer
+from file_recording.result.models import Allotment
 from file_recording.user.models import User
 # Create your views here.
 
@@ -17,6 +18,10 @@ from file_recording.user.models import User
 def user_application(request):
     if request.method == 'POST':
         user = User.objects.get(uid=request.data['user'])
+        if Allotment.objects.filter(user=user).exists() or Allotment.objects.filter(user__aadhar_no=user.spouse_aadhar).exists():
+            return_obj = ReturnObj().ret(403)
+            return_obj['content']['result']['message'] = 'The user has already been allocated a house.'
+            return Response(data=return_obj['content'], status=return_obj['status'])
         request.data['user'] = user.id
         serializer = RegistrationWriteSerializer(data=request.data)
         if serializer.is_valid():
@@ -44,4 +49,4 @@ def validate(request):
     application.verified_by = employee
     application.is_valid = request.data['is_valid']
     application.save()
-    print('saved and verified')
+    return
