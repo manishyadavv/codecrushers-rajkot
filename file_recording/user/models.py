@@ -34,10 +34,12 @@ class User(models.Model):
                                      blank=True, null=False, default='')
     pan_number = models.CharField(max_length=10,
                                   validators=[RegexValidator(regex=r'^[A-Z]{5}[0-9]{4}[A-Z]{1}$',
-                                                             message='Pan number not valid.')])
+                                                             message='Pan number not valid.')],
+                                  unique=True)
     aadhar_no = models.CharField(max_length=12,
                                  validators=[RegexValidator(regex=r'^[0-9]{12}$',
-                                                            message='Aadhar number not valid.')])
+                                                            message='Aadhar number not valid.')],
+                                 unique=True)
     birth_date = models.DateField()
     phone = models.CharField(max_length=13, unique=True,
                              validators=[RegexValidator(regex=r'^(?:\+?91)?[789]\d{9,10}$',
@@ -49,7 +51,7 @@ class User(models.Model):
     is_login = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
     verified_by = models.ForeignKey(
-        Admin, on_delete=models.CASCADE, null=True, blank=False)
+        Admin, on_delete=models.CASCADE, null=True, blank=True, default=None)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
