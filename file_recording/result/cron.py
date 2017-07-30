@@ -10,7 +10,9 @@ from file_recording.result.utils import email
 from file_recording.schemes.models import Scheme
 
 
-class result_draw(CronJobBase):
+class ResultDraw(CronJobBase):
+    code = 'file_recording.result.ResultDraw'
+
     def allot_flats(self, flat):
         registrations = Registration.objects.filter(flat=flat)
         users = [

@@ -83,6 +83,7 @@ MIDDLEWARE = [
 
 CRON_CLASSES = [
     'file_recording.user.cron.AutoLogout',
+    'file_recording.result.cron.ResultDraw'
 ]
 
 ROOT_URLCONF = 'file_recording.urls'
