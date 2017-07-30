@@ -24,7 +24,10 @@ def doc_types(request):
 @api_view(['POST'])
 @parser_classes((JSONParser,))
 def upload_file(request):
-    request.data['user'] = User.objects.get(uid=request.data['user']).id
+    n = len(request.data)
+    for i in range(n):
+        request.data[i]['user'] = User.objects.get(
+            uid=request.data[i]['user']).id
     serializer = DocumentSerializer(request.data, many=True)
     if serializer.is_valid():
         serializer.save()
