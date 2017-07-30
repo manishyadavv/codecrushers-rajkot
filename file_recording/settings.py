@@ -46,7 +46,7 @@ SECRET_KEY = '-(k7w8z88&j(3qyv(99r7997#^)2=5zadrujfm8hxa1mbv5!el'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config.get('general', 'DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['13.126.53.179',]
 MEDIA_ROOT = BASE_DIR + '/file_recording/document/docs/'
 MEDIA_URL = 'documents/docs/'
 
@@ -166,6 +166,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT =  os.path.join(BASE_DIR,'static')
 
 # fs = FileSystemStorage(location=MEDIA_ROOT)
