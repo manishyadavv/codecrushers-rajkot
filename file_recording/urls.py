@@ -21,6 +21,7 @@ from django.contrib import admin
 from file_recording.document.urls import urlpatterns as document_urls
 from file_recording.employee.url import urlpatterns as employee_urls
 from file_recording.registration.urls import urlpatterns as registeration_urls
+from file_recording.result.urls import urlpatterns as result_urls
 from file_recording.schemes.urls import urlpatterns as scheme_urls
 from file_recording.updates.urls import urlpatterns as notification_urls
 from file_recording.user.urls import urlpatterns as user_urls
@@ -33,5 +34,6 @@ urlpatterns = [
     url(r'^scheme/', include(scheme_urls)),
     url(r'^registeration/', include(registeration_urls)),
     url(r'^documents/', include(document_urls)),
-    url(r'employee/', include(employee_urls))
+    url(r'^employee/', include(employee_urls)),
+    url(r'^result/', include(result_urls))
 ]  # +static()
