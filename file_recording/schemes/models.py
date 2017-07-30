@@ -36,6 +36,7 @@ class Flat(models.Model):
 class Scheme(models.Model):
     name = models.CharField(max_length=100)
     slug = AutoSlugField(populate_from='name')
+    details = models.TextField()
     location = models.TextField(null=False, blank=False)
     start_date = models.DateField()
     end_date = models.DateField()
