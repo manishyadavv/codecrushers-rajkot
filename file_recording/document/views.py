@@ -28,7 +28,7 @@ def upload_file(request):
     for i in range(n):
         request.data[i]['user'] = User.objects.get(
             uid=request.data[i]['user']).id
-    serializer = DocumentSerializer(request.data, many=True)
+    serializer = DocumentSerializer(data=request.data, many=True)
     if serializer.is_valid():
         serializer.save()
         return_obj = ReturnObj().ret(201)
